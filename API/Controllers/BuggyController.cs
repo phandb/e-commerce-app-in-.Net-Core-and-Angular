@@ -27,9 +27,9 @@ namespace API.Controllers
         [HttpGet("servererror")]
         public ActionResult GetServerError()
         {
-            var thing = _context.Products.Find(42);
+            var thing = _context.Products.Find(42);  //  product 42 not exist
 
-            var thingToReturn = thing.ToString();
+            var thingToReturn = thing.ToString();  //  Generate exception error
 
             return Ok();
         }

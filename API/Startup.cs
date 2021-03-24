@@ -35,10 +35,16 @@ namespace API
             services.AddControllers();
             services.AddDbContext<StoreContext>(x =>
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-
+            
+            //  The following services from Helpers folder
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
-           
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
            
         }
 
@@ -47,18 +53,21 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
 
-           // app.UseDeveloperExceptionPage();
-            app.UseSwaggerDocumentation();
-
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
+           // app.UseDeveloperExceptionPage();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseStaticFiles();
 
+            app.UseCors("CorsPolicy");
+
             app.UseAuthorization();
+
+            app.UseSwaggerDocumentation();
 
             app.UseEndpoints(endpoints =>
             {

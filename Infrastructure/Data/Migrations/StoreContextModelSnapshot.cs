@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11");
+                .HasAnnotation("ProductVersion", "5.0.4");
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
@@ -23,19 +23,19 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(180);
+                        .HasMaxLength(180)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PictureUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
+                    b.Property<double>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductBrandId")
@@ -94,6 +94,10 @@ namespace Infrastructure.Data.Migrations
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ProductBrand");
+
+                    b.Navigation("ProductType");
                 });
 #pragma warning restore 612, 618
         }
