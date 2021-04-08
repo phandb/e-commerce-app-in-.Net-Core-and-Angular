@@ -20,11 +20,16 @@ namespace Core.Specifications
 
         public List<Expression<Func<T, object>>> Includes {get; } = 
                 new List<Expression<Func<T, object>>>();
+        
+        
+        //  Sorting and filtering
 
         public Expression<Func<T, object>> OrderBy {get; private set;}
 
         public Expression<Func<T, object>> OrderByDescending {get; private set;}
 
+
+        //  Pagination
         public int Take {get; private set;}
 
         public int Skip {get; private set;}
@@ -46,6 +51,8 @@ namespace Core.Specifications
             OrderByDescending = orderByDescExpression;
         }
 
+
+        //  Apply pagination
         protected void ApplyPaging(int skip, int take)
         {
             Skip = skip;

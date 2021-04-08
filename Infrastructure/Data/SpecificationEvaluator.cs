@@ -15,11 +15,15 @@ namespace Infrastructure.Data
 
             // The order of the following is essential:  Criteira -> filter -> paging
             var query = inputQuery;
+
+            //  for filtering
             if (spec.Criteria != null)
             {
                 query = query.Where(spec.Criteria);
             }
 
+
+            //  for sorting
             if (spec.OrderBy != null)
             {
                 query = query.OrderBy(spec.OrderBy);
@@ -29,6 +33,8 @@ namespace Infrastructure.Data
             {
                 query = query.OrderByDescending(spec.OrderByDescending);
             }
+
+            //  query for pagination
 
             if (spec.IsPagingEnabled)
             {

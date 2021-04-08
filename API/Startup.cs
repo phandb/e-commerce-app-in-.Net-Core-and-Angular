@@ -36,7 +36,7 @@ namespace API
             services.AddDbContext<StoreContext>(x =>
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             
-            //  The following services from Helpers folder
+            //  The following services from Extensions and Helpers folder
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
             services.AddCors(options => {
